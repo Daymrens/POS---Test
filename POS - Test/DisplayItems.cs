@@ -72,7 +72,7 @@ namespace POS___Test
             buying = false;
             // Stop buying thread
             navigationThread.Join();
-            
+
         }
         public static void NavigationThread()
         {
@@ -82,33 +82,31 @@ namespace POS___Test
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
 
+
                 if (keyInfo.Key == ConsoleKey.D0)
                 {
                     Console.Write("\nPlease enter the product name: ");
                     int prodNum = int.Parse(Console.ReadLine());
 
-                    int qty;
-                    Console.Write("Please enter the quantity: ");
+                    // Add the product to the cart
+                    product.ProductsinCart(prodNum);
 
-                    if (int.TryParse(Console.ReadLine(), out qty))
-                    {
-                        // Add the product to the cart
-                        product.ProductsinCart(prodNum);
-                        product.Quantity(qty);
-
-                        Thread.Sleep(100);
-                        Console.WriteLine("Product added");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid quantity. Please enter a valid integer.");
-                    }
+                    Thread.Sleep(100);
+                    Console.WriteLine("Product added");
                 }
+               
+
+
                 else if (keyInfo.Key == ConsoleKey.D1)
                 {
                     // Option for D1
                 }
                 // Add other options as needed...
+
+                else
+                {
+                    Console.WriteLine("Invalid quantity. Please enter a valid integer.");
+                }
             }
         }
 
@@ -118,7 +116,8 @@ namespace POS___Test
 
 
     }
-    }
+}
+    
 
 
 
