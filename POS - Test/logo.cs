@@ -12,6 +12,7 @@ namespace POS___Test
 
         public static void Display()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("══════════════════════════════");
             Console.WriteLine(@"  ██████╗  ██████╗ ███████╗");
             Thread.Sleep(50);

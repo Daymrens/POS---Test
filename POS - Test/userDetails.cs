@@ -19,10 +19,7 @@ namespace POS___Test
         public string choice;
         public int userInput;
 
-        public userDetails() 
-        {
-        
-        }
+       
 
         public bool CheckChoice()
         {
@@ -44,7 +41,7 @@ namespace POS___Test
                 {
                     Thread.Sleep(500);
                     Console.Clear();
-                    Console.WriteLine("Error, Out of bounds");
+                    Console.WriteLine(" - Error, Out of bounds");
                     return false;
                 }
                 return true;
@@ -53,7 +50,7 @@ namespace POS___Test
             {
                 Thread.Sleep(500);
                 Console.Clear();
-                Console.WriteLine("Invalid input. Please enter a valid number.");
+                Console.WriteLine(" - Invalid input. Please enter a valid number.");
                 return false;
             }
         }
@@ -65,14 +62,14 @@ namespace POS___Test
         {
             if(userName == admin && password == adminPass)
             {
-                Console.WriteLine("Log in Successfully");
+                Console.WriteLine("Log in Successfull");
                 return true;
             }
             else
             {
                 Thread.Sleep(500);
                 Console.Clear();
-                Console.WriteLine("Check credentials!");
+                Console.WriteLine("Invalid admin(basta di mao imong admin details!");
                 return false;
                 
             }
@@ -84,12 +81,12 @@ namespace POS___Test
             {
                 Thread.Sleep(500);
                 Console.Clear();
-                Console.WriteLine("Error, empty");
+                Console.WriteLine(" - Error, empty");
                 return false;
             }
             else
             {
-                Console.WriteLine("Log in Successfully");
+                Console.WriteLine(" - Log in Successfully");
                 return true;
             }
 
