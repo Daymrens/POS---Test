@@ -19,7 +19,7 @@ namespace POS___Test
         public string choice;
         public int userInput;
 
-       
+       //example adding or removing code
 
         public bool CheckChoice()
         {
