@@ -15,8 +15,17 @@ namespace POS___Test
         public List<string> productNames = new List<string>();
         public List<int> quantity = new List<int>();
         public List<int> price = new List<int>();
+        public LinkedList<int> cart = new LinkedList<int>();
+        public Stack<int> order = new Stack<int>();
 
-
+        public void ProductsinCart(int value)
+        {
+            cart.AddLast(value); 
+        }
+        public void Quantity(int qty)
+        {
+            order.Push(qty);
+        }
         public void DisplayProductName()
         {
             productNames = new List<string>()
@@ -30,12 +39,29 @@ namespace POS___Test
             "Product7",
             "Product8",
             "Product9",
-            "Product10"
+            "Product10",
+            "Product11",
+            "Product12",
+            "Product13",
+            "Product14",
+            "Product15",
+            "Product16",
+            "Product17",
+            "Product18",
+            "Product19",
+            "Product20",
+            "Product21",
+            "Product22",
+            "Product23",
+            "Product24",
+            "Product25",
+            "Product26",
+            "Product27",
+            "Product28",
+            "Product29",
+            "Product30",
             };
-            //foreach(string name in productNames)
-            //{
-            //    Console.WriteLine(name);
-            //}
+           
         }
 
         public void DisplayQuantity()
@@ -51,7 +77,27 @@ namespace POS___Test
             7,
             9,
             2,
-            4
+            4,
+            10,
+            5,
+            8,
+            3,
+            12,
+            6,
+            7,
+            9,
+            2,
+            4,
+            10,
+            5,
+            8,
+            3,
+            12,
+            6,
+            7,
+            9,
+            2,
+            4,
             };
         }
 
@@ -68,7 +114,27 @@ namespace POS___Test
             20,
             20,
             20,
-            20
+            20,
+            20,
+            10,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            10,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
             };
         }
 

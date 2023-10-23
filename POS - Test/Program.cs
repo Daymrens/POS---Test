@@ -21,18 +21,13 @@ namespace POS___Test
             
             
             userDetails user = new userDetails();
-            linked.list.Add("dime");
-            linked.list.Add("dimerenx");
-            linked.list.Add("renz");
-            linked.list.Add("gwapo");
-            linked.list.Add("dimee");
-            linked.list.Add("dimeloveer");
+     
             do
             {
 
                 logo.Display();
-                Console.WriteLine(" - LOG IN - ");
-                Console.Write(" [0]. User\n [1]. Admin\n- ");
+                Console.WriteLine("Choose one below:");
+                Console.Write(" [0]. Sign Up\n [1]. Employees Access\n- ");
                 user.choice = Console.ReadLine();
 
 
@@ -43,12 +38,29 @@ namespace POS___Test
                     {
                         do
                         {
+                        
+                            Console.Clear();
                             logo.Display();
-                            Console.WriteLine("User - LogIn");
+                            Console.WriteLine("User - SignUp");
                             Console.Write("User: ");
                             user.userName = Console.ReadLine();
                             Console.Write("Password: ");
                             user.password = Console.ReadLine();
+                        start1:
+                            Console.Clear();
+                            logo.Display();
+                            Console.WriteLine("Log In");
+                            Console.Write("UserName: ");
+                            string name = Console.ReadLine();
+                            Console.Write("Password: ");
+                            string pass = Console.ReadLine();
+                            if (name != user.userName || pass != user.password)
+                            {
+                                Console.WriteLine("Invalid input!");
+                                Thread.Sleep(500);
+                                goto start1;
+                            }
+
                         } while (!user.CheckUser());
                     }
                     break;
@@ -57,7 +69,7 @@ namespace POS___Test
                         do
                         {
                             logo.Display();
-                            Console.WriteLine("Admin - LogIn");
+                            Console.WriteLine("Employees Access - LogIn");
                             Console.Write("User: ");
                             user.userName = Console.ReadLine();
                             Console.Write("Password: ");
@@ -154,6 +166,27 @@ namespace POS___Test
 
                         
                 }
+
+            }
+            else if (user.userInput == 0)
+            {
+                Thread.Sleep(500);
+                Console.Clear();
+                logo.Display();
+                Console.WriteLine(" - Menu - ");
+                Console.Write(" [0] Products\n" +
+                                  " [1] POS\n" +
+                                  " [2] Log Out\n- ");
+                                  
+                int choice = int.Parse(Console.ReadLine());
+                switch(choice)
+                {
+                    case 0:
+                        {
+                            DisplayItems.Menu1();
+                        }break;
+                }
+
 
             }
         }
