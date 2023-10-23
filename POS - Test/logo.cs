@@ -28,6 +28,8 @@ namespace POS___Test
             Thread.Sleep(50);
             Console.WriteLine("══════════════════════════════");
             Thread.Sleep(50);
+            //hotdog
+
         }
     }
 }
