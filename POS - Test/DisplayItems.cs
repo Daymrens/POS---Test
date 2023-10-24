@@ -69,12 +69,12 @@ namespace POS___Test
 
             } while (keyInfo.Key != ConsoleKey.Escape);
 
-            buying = false;
+           
             // Stop buying thread
             navigationThread.Join();
 
         }
-        public static void NavigationThread()
+        static void NavigationThread()
         {
             productsLinked product = new productsLinked();
             bool buying = true;
@@ -82,30 +82,26 @@ namespace POS___Test
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
 
-
                 if (keyInfo.Key == ConsoleKey.D0)
                 {
-                    Console.Write("\nPlease enter the product name: ");
-                    int prodNum = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\nPlease enter the product number you want to buy:");
+                    int productNumber = int.Parse(Console.ReadLine());
+                    product.ProductsinCart(productNumber);
 
-                    // Add the product to the cart
-                    product.ProductsinCart(prodNum);
-
+                    Console.WriteLine("Added to cart");
                     Thread.Sleep(100);
-                    Console.WriteLine("Product added");
-                }
-               
 
 
-                else if (keyInfo.Key == ConsoleKey.D1)
-                {
-                    // Option for D1
-                }
-                // Add other options as needed...
-
-                else
-                {
-                    Console.WriteLine("Invalid quantity. Please enter a valid integer.");
+                    //if (int.TryParse(Console.ReadLine(), out productNumber) && productNumber >= 1 && productNumber <= product.productNames.Count)
+                    //{
+                    //    int index = productNumber - 1;
+                    //    Console.WriteLine($"You have selected: {product.productNames[index]}");
+                    //    // Add your buy logic here
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Invalid input. Please enter a valid product number.");
+                    //}
                 }
             }
         }

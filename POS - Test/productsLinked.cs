@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace POS___Test
 {
@@ -157,7 +158,11 @@ namespace POS___Test
             return;
         }
 
-        public void Find(List<string> list, string prodName)
+        public void Find(List<string> listt, string prodNumber)
+        {
+            
+        }
+        public void FindRelevance(List<string> list, string prodName)
         {            
             foreach (var item in list)
             {
