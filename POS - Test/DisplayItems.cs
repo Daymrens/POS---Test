@@ -22,7 +22,6 @@ namespace POS___Test
             string[] lines = { "Add", "Edit", "Remove", "Search" };
             int currentLines = 0;
 
-            bool buying;
 
             int currentPage = 1;
             int pageSize = 10;
@@ -30,8 +29,7 @@ namespace POS___Test
 
             ConsoleKeyInfo keyInfo;
 
-            do
-            {
+          
                 Console.Clear();
 
                 Console.WriteLine($"Page {currentPage} of {totalPages}");
@@ -49,57 +47,82 @@ namespace POS___Test
                 Console.WriteLine("  ════════════════════════════════════════════════");
                 Console.WriteLine(" < prev.                                 next >");
 
-                for (int i = 0; i < lines.Length; i++)
+
+                int currentLine = 0;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (i == currentLine)
                 {
-                    if (i == currentLines)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                    }
-                    Console.WriteLine(" -" + lines[i]);
-
-
-                    Console.ResetColor();
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.Black;
                 }
-                
-                keyInfo = Console.ReadKey();
+                Console.WriteLine(lines[i]);
+                Console.ResetColor();
+            }
 
-                if (keyInfo.Key == ConsoleKey.LeftArrow && currentPage > 1)
+            do
                 {
-                    currentPage--;
-                }
-                else if (keyInfo.Key == ConsoleKey.RightArrow && currentPage < totalPages)
-                {
-                    currentPage++;
-                }
-                
-                if (keyInfo.Key == ConsoleKey.UpArrow)
+                  
+                   
+
+                    keyInfo = Console.ReadKey();
+
+                    if (keyInfo.Key == ConsoleKey.UpArrow)
                     {
-                        currentLines = Math.Max(0, currentLines - 1);
+                        currentLine = Math.Max(0, currentLine - 1);
                     }
-               else if (keyInfo.Key == ConsoleKey.DownArrow)
+                    else if (keyInfo.Key == ConsoleKey.DownArrow)
                     {
-                        currentLines = Math.Min(lines.Length - 1, currentLines + 1);
+                        currentLine = Math.Min(lines.Length - 1, currentLine + 1);
+                    }
+                    else if (keyInfo.Key == ConsoleKey.Enter)
+                    {
+                        if (currentLine == 0) // View Items
+                        {
+                           
+                            Console.WriteLine("Viewing Items...");
+                            Console.ReadKey();
+                        }
+                        else if (currentLine == 1) // Add Item
+                        {
+                          
+                            Console.WriteLine("Enter item to be added:");
+                            string item = Console.ReadLine();
+                            Console.WriteLine("Adding item: " + item);
+                            Console.ReadKey();
+                        }
+                        else if (currentLine == 2) // Remove Item
+                        {
+                            
+                            Console.WriteLine("Enter item to be removed:");
+                            string item = Console.ReadLine();
+                            Console.WriteLine("Removing item: " + item);
+                            Console.ReadKey();
+                        }
+                        else if (currentLine == 3) // Exit
+                        {
+                            break;
+                        }
                     }
 
-               
-
-
-
-            } while (keyInfo.Key != ConsoleKey.Escape);
-
-           
-       
-
-        }
-       
-
-
-
-
-
+                } while (keyInfo.Key != ConsoleKey.Escape);
+            }
+            }
     }
-}
+
+
+
+
+
+            
+            
+       
+
+
+
+
+
+
     
 
 
