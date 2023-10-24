@@ -32,6 +32,7 @@ namespace POS___Test
             string name = Console.ReadLine();
             Console.SetCursorPosition(11, currentLine - 0); // Move the cursor up 3 
             string pass = Console.ReadLine();
+           
             DisplayItems.Menu1();
 
 
