@@ -19,8 +19,9 @@ namespace POS___Test
             product.DisplayQuantity();
             product.DisplayPrice();
 
-            Thread navigationThread = new Thread(NavigationThread);
-            navigationThread.Start();
+            string[] lines = { "Add", "Edit", "Remove", "Search" };
+            int currentLines = 0;
+
             bool buying;
 
             int currentPage = 1;
@@ -40,20 +41,27 @@ namespace POS___Test
                 for (int i = (currentPage - 1) * pageSize; i < Math.Min(currentPage * pageSize, product.productNames.Count); i++)
                 {
                     Console.Write($" [{i + 1}]".PadRight(5));
-                    Console.Write($"║ {product.productNames[i].PadRight(15)}║");
+                    Console.Write($"║ {product.productNames[i].PadRight(20)}║");
                     Console.Write($" {product.quantity[i].ToString().PadRight(12)}║");
                     Console.Write($" $ {product.price[i].ToString().PadRight(10)}║\n");
                 }
 
                 Console.WriteLine("  ════════════════════════════════════════════════");
                 Console.WriteLine(" < prev.                                 next >");
-                Console.WriteLine("Options");
-                Console.Write(" [0] Add\n" +
-                              " [1] Edit\n" +
-                              " [2] Remove\n" +
-                              " [3] Display\n" +
-                              " [4] Search\n- ");
 
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (i == currentLines)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+                    Console.WriteLine(" -" + lines[i]);
+
+
+                    Console.ResetColor();
+                }
+                
                 keyInfo = Console.ReadKey();
 
                 if (keyInfo.Key == ConsoleKey.LeftArrow && currentPage > 1)
@@ -64,48 +72,27 @@ namespace POS___Test
                 {
                     currentPage++;
                 }
+                
+                if (keyInfo.Key == ConsoleKey.UpArrow)
+                    {
+                        currentLines = Math.Max(0, currentLines - 1);
+                    }
+               else if (keyInfo.Key == ConsoleKey.DownArrow)
+                    {
+                        currentLines = Math.Min(lines.Length - 1, currentLines + 1);
+                    }
+
+               
 
 
 
             } while (keyInfo.Key != ConsoleKey.Escape);
 
            
-            // Stop buying thread
-            navigationThread.Join();
+       
 
         }
-        static void NavigationThread()
-        {
-            productsLinked product = new productsLinked();
-            bool buying = true;
-            while (buying)
-            {
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-                if (keyInfo.Key == ConsoleKey.D0)
-                {
-                    Console.WriteLine("\nPlease enter the product number you want to buy:");
-                    int productNumber = int.Parse(Console.ReadLine());
-                    product.ProductsinCart(productNumber);
-
-                    Console.WriteLine("Added to cart");
-                    Thread.Sleep(100);
-
-
-                    //if (int.TryParse(Console.ReadLine(), out productNumber) && productNumber >= 1 && productNumber <= product.productNames.Count)
-                    //{
-                    //    int index = productNumber - 1;
-                    //    Console.WriteLine($"You have selected: {product.productNames[index]}");
-                    //    // Add your buy logic here
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("Invalid input. Please enter a valid product number.");
-                    //}
-                }
-            }
-        }
-
+       
 
 
 
