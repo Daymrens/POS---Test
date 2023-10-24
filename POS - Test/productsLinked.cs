@@ -18,7 +18,6 @@ namespace POS___Test
         public List<int> price = new List<int>();
         public LinkedList<int> cart = new LinkedList<int>();
         public Stack<int> order = new Stack<int>();
-        public bool repeat = false;
 
         public void ProductsinCart(int value)
         {
