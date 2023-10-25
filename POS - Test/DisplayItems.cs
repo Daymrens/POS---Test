@@ -102,29 +102,41 @@ namespace POS___Test
                 }
                 else if (keyInfo.Key == ConsoleKey.Enter)
                 {
-                    if (currentLines == 0) // View Items
+                    if (currentLines == 0) // Add Items
                     {
                         Console.Write("Enter item to be added (by number): ");
                         int itemNumber = int.Parse(Console.ReadLine()) - 1;
+                        Console.Write("Quantity: ");
+                        int quantity = int.Parse(Console.ReadLine());
+                        string itemName = product.productNames[itemNumber];
+                        int itemQuantity = product.quantity[itemNumber];
 
-                        if (itemNumber >= 0 && itemNumber < product.productNames.Count)
+                        if (quantity > itemQuantity)
                         {
-                            string itemName = product.productNames[itemNumber];
-                            int itemQuantity = product.quantity[itemNumber];
 
-                            Console.WriteLine("Adding item: " + itemName + " (Quantity: " + itemQuantity + ")");
 
-                            // Add item to cart
-                            product.list.Add(itemName + " (Qty: " + itemQuantity + ")");
+                            Console.WriteLine("Invalid item number!");
                         }
                         else
                         {
-                            Console.WriteLine("Invalid item number!");
+                           
+                            Console.WriteLine("Adding item: " + itemName + " (Quantity: " + quantity + ")");
+                            
+                            if(itemQuantity == 0)
+                            {
+                                product.list.Remove(itemName);
+                            }
+                            
+                            // Add item to cart
+                            product.list.Add(itemName + " (Qty: " + quantity + ")");
+                            
                         }
 
+
                         Console.ReadLine();
+                        itemQuantity--;
                     }
-                    else if (currentLines == 1) // Add Item
+                    else if (currentLines == 1) //Edit Item
                     {
                         // ...
                     }
