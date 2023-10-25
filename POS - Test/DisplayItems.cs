@@ -41,7 +41,21 @@ namespace POS___Test
                 Console.WriteLine($"Page {currentPage} of {totalPages}");
                 Console.WriteLine("  No.  Product Name \t Quantity \t Price");
                 Console.WriteLine("  ═══════════════════════════════════════════════");
-
+                //for (int i = (currentPage - 1) * pageSize; i < Math.Min(currentPage * pageSize, product.productNames.Count); i++)
+                //{
+                //    foreach (var names in  product.productNames)
+                //{
+                //    Console.Write($" ║{names}║");
+                //}
+                //foreach(var qty in product.quantity)
+                //{
+                //    Console.Write($" ║{qty.ToString()}║");
+                //}
+                //foreach (var price in product.price)
+                //{
+                //    Console.Write($" ║{price.ToString()}");
+                //}
+                //}
                 for (int i = (currentPage - 1) * pageSize; i < Math.Min(currentPage * pageSize, product.productNames.Count); i++)
                 {
                     Console.Write($" [{i + 1}]".PadRight(5));
