@@ -19,48 +19,42 @@ namespace POS___Test
         public LinkedList<int> cart = new LinkedList<int>();
         public Stack<int> order = new Stack<int>();
 
-        public void ProductsinCart(int value)
-        {
-            cart.AddLast(value); 
-        }
-        public void Quantity(int qty)
-        {
-            order.Push(qty);
-        }
+      
+     
         public void DisplayProductName()
         {
             productNames = new List<string>()
             {
-            "Product1",
-            "Product2",
-            "Product3",
-            "Product4",
-            "Product5",
-            "Product6",
-            "Product7",
-            "Product8",
-            "Product9",
-            "Product10",
-            "Product11",
-            "Product12",
-            "Product13",
-            "Product14",
-            "Product15",
-            "Product16",
-            "Product17",
-            "Product18",
-            "Product19",
-            "Product20",
-            "Product21",
-            "Product22",
-            "Product23",
-            "Product24",
-            "Product25",
-            "Product26",
-            "Product27",
-            "Product28",
-            "Product29",
-            "Product30",
+            "Milk",
+            "Chocolate",
+            "Candy",
+            "Sour Candy",
+            "Bubble Gum",
+            "Snow Bear",
+            "Max",
+            "Presto",
+            "Sky Flakes",
+            "Bingo",
+            "Chocomucho",
+            "Cloud 9",
+            "Rebisco Crackers",
+            "Fresh Milk",
+            "Pineaple Juice",
+            "C2 Large",
+            "C2 Medium",
+            "C3 Small",
+            "Sprite Can",
+            "Coke Can",
+            "Royal Can",
+            "Trust",
+            "Robust",
+            "Lighter",
+            "Milo",
+            "Orange Juice",
+            "Tang",
+            "Eight Oclock",
+            "Bread",
+            "Mayonnaise",
             };
            
         }
@@ -139,7 +133,7 @@ namespace POS___Test
             };
         }
 
-        public void AddFirst(string prodName)
+        public void Add(string prodName)
         {
             list.Add(prodName);
             return;
@@ -158,10 +152,7 @@ namespace POS___Test
             return;
         }
 
-        public void Find(List<string> listt, string prodNumber)
-        {
-            
-        }
+    
         public void FindRelevance(List<string> list, string prodName)
         {            
             foreach (var item in list)
@@ -184,18 +175,12 @@ namespace POS___Test
 
         public void Display() 
         {
-            int count = 0;
-            string pad = "║";
-            foreach (var item in list)
+            foreach(var item in list)
             {
-                for(int i = 0; i < list.Count; i++)
-                {
-                    count++;
-                    break;
-                }
-                Console.Write("[{0}]" + item + pad.PadLeft(20) + "\n " + pad.PadLeft(2), count);
+                Console.WriteLine(item);
+            }
             }        
         }
 
     }
-}
+
