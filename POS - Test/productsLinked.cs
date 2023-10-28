@@ -17,122 +17,16 @@ namespace POS___Test
         public List<int> quantity = new List<int>();
         public List<int> price = new List<int>();
         public LinkedList<int> cart = new LinkedList<int>();
-        public Stack<int> order = new Stack<int>();
+        public List<string> order = new List<string>();
 
       
      
-        public void DisplayProductName()
-        {
-            productNames = new List<string>()
-            {
-            "Milk",
-            "Chocolate",
-            "Candy",
-            "Sour Candy",
-            "Bubble Gum",
-            "Snow Bear",
-            "Max",
-            "Presto",
-            "Sky Flakes",
-            "Bingo",
-            "Chocomucho",
-            "Cloud 9",
-            "Rebisco Crackers",
-            "Fresh Milk",
-            "Pineaple Juice",
-            "C2 Large",
-            "C2 Medium",
-            "C3 Small",
-            "Sprite Can",
-            "Coke Can",
-            "Royal Can",
-            "Trust",
-            "Robust",
-            "Lighter",
-            "Milo",
-            "Orange Juice",
-            "Tang",
-            "Eight Oclock",
-            "Bread",
-            "Mayonnaise",
-            };
-           
-        }
+       
 
-        public void DisplayQuantity()
-        {
-            quantity = new List<int>()
-            {
-            10,
-            5,
-            8,
-            3,
-            12,
-            6,
-            7,
-            9,
-            2,
-            4,
-            10,
-            5,
-            8,
-            3,
-            12,
-            6,
-            7,
-            9,
-            2,
-            4,
-            10,
-            5,
-            8,
-            3,
-            12,
-            6,
-            7,
-            9,
-            2,
-            4,
-            };
-        }
+   
+        
 
-        public void DisplayPrice()
-        {
-            price = new List<int>()
-            {
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            };
-        }
-
+    
         public void Add(string prodName)
         {
             list.Add(prodName);
