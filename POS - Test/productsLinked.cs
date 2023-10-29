@@ -18,6 +18,7 @@ namespace POS___Test
         public List<int> price = new List<int>();
         public LinkedList<int> cart = new LinkedList<int>();
         public List<string> order = new List<string>();
+        public List<int> values = new List<int>();
 
       
      
