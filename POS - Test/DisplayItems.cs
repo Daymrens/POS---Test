@@ -65,26 +65,26 @@ namespace POS___Test
             9,
             2,
             4,
-            10,
-            5,
-            8,
-            3,
+            22,
+            99,
+            85,
+            34,
             12,
-            6,
-            7,
-            9,
-            2,
-            4,
-            10,
-            5,
-            8,
-            3,
-            12,
-            6,
-            7,
-            9,
-            2,
-            4,
+            61,
+            73,
+            93,
+            24,
+            45,
+            105,
+            55,
+            85,
+            35,
+            124,
+            64,
+            74,
+            93,
+            23,
+            43,
             };
             product.price = new List<int>()
             {
@@ -130,7 +130,7 @@ namespace POS___Test
             int totalPages = (int)Math.Ceiling((double)product.productNames.Count / pageSize);
 
             ConsoleKeyInfo keyInfo;
-
+            start:
             do
             {
                 Console.Clear();
@@ -210,25 +210,33 @@ namespace POS___Test
                         
                         if (int.TryParse(itemNumber, out int number) && int.TryParse(quantity, out int dquantity))
                         {
-                            int selectedIndex = number - 1; // Adjust for 0-based index
+               
+                           
+                                int selectedIndex = number - 1; // Adjust for 0-based index
+
+                                int selectedQuantity = product.quantity[selectedIndex];
+
+                                if (dquantity <= selectedQuantity)
+                                {
+                                    product.quantity[selectedIndex] -= dquantity;
+                                    string itemName = product.productNames[selectedIndex];
+                                    product.order.Add(itemName + " (Qty: " + quantity + ")");
+                                    product.values.Add(dquantity);
+                                }
+
+                                else
+                                {
+                                    Console.WriteLine("Insufficient quantity!");
+                                }
                             
-                            int selectedQuantity = product.quantity[selectedIndex];
-
-                            if (dquantity <= selectedQuantity)
-                            {
-                                product.quantity[selectedIndex] -= dquantity;
-                                string itemName = product.productNames[selectedIndex];
-                                product.order.Add(itemName + " (Qty: " + quantity + ")");
-                                product.values.Add(dquantity);
-                                
-                            }
-
-                            else
-                            {
-                                Console.WriteLine("Insufficient quantity!");
-                            }
+                           
+                          
                         }
-                            
+                        else if (keyInfo.Key == ConsoleKey.A)
+                        {
+                            goto start;
+                        }
+
                     }
                     else if (currentLines == 1) //Edit Item
                     {
@@ -238,7 +246,7 @@ namespace POS___Test
                     {
                         Console.WriteLine("Note: from 1 - i. depend on the product added");
                         Console.Write("Enter item to be removed (by number): ");
-                        int itemNumber = int.Parse(Console.ReadLine()) - 1;
+                        int itemNumber = int.Parse(Console.ReadLine());
 
                         if (itemNumber >= 0 && itemNumber < product.order.Count)
                         {
