@@ -16,10 +16,6 @@ namespace POS___Test
         public static void Menu1()
         {
             productsLinked product = new productsLinked();
-            //product.DisplayProductName();
-            //product.DisplayQuantity();
-            //product.DisplayPrice();
-
             product.productNames = new List<string>()
             {
             "Milk",
@@ -121,10 +117,7 @@ namespace POS___Test
             };
 
             string[] lines = { "Add", "Edit", "Remove", "Search" };
-            int currentLines = 0;
-           
-        
-
+            int currentLines = 0;           
             int currentPage = 1;
             int pageSize = 10;
             int totalPages = (int)Math.Ceiling((double)product.productNames.Count / pageSize);
@@ -140,7 +133,6 @@ namespace POS___Test
                 Console.WriteLine($"Page {currentPage} of {totalPages}");
                 Console.WriteLine("  No.  Product Name \t Quantity \t Price");
                 Console.WriteLine("  ════════════════════════════════════════════════");
-
                 for (int i = (currentPage - 1) * pageSize; i < Math.Min(currentPage * pageSize, product.productNames.Count); i++)
                 {
                     Console.Write($" [{i + 1}]".PadRight(5));
@@ -148,7 +140,6 @@ namespace POS___Test
                     Console.Write($" {product.quantity[i].ToString().PadRight(12)}║");
                     Console.Write($" $ {product.price[i].ToString().PadRight(5)}║\n");
                 }
-
                 Console.WriteLine("  ═════════════════════════════════════════════════");
                 Console.WriteLine(" < prev.                                 next >");
 
@@ -160,7 +151,6 @@ namespace POS___Test
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
                     Console.WriteLine(" -" + lines[i]);
-
                     Console.ResetColor();
                 }
 
@@ -168,15 +158,26 @@ namespace POS___Test
                 Console.WriteLine("ITEMS IN CART");
                 Console.SetCursorPosition(118, 2);
                 Console.WriteLine("══════════════════════════");
-
-                for (int i = 0; i < product.order.Count; i++)
+                //for (int i = 0; i < product.order.Count; i++)
+                //{
+                //                      
+                //}
+                for (int i = 0; i < product.cartItems.Count; i++)
                 {
-                    Console.SetCursorPosition(118, i + 3); // Adjust position as needed
-                    Console.WriteLine($"║ {product.order[i].PadRight(23)}║");
-                    
+                    if (product.cartItems[i].quantityInCart > 0)
+                    {
+                        Console.SetCursorPosition(118, i + 3);
+                        Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
+                    }
+                    else
+                    {
+                        // Remove item from cart
+                        product.cartItems.RemoveAt(i);
+                        i--; // Decrement i to account for removed item
+                    }
                 }
 
-                Console.SetCursorPosition(118, product.order.Count + 3);
+                Console.SetCursorPosition(118, product.cartItems.Count + 3);
                 Console.WriteLine("══════════════════════════");
                 Console.SetCursorPosition(1, 19);
                 
@@ -203,39 +204,7 @@ namespace POS___Test
 
                     if (currentLines == 0) // Add Items
                     {
-                        Console.Write("Enter item to be added (by number): ");
-                        string itemNumber = Console.ReadLine();
-                        Console.Write("Quantity: ");
-                        string quantity = Console.ReadLine();
-                        
-                        if (int.TryParse(itemNumber, out int number) && int.TryParse(quantity, out int dquantity))
-                        {
-               
-                           
-                                int selectedIndex = number - 1; // Adjust for 0-based index
-
-                                int selectedQuantity = product.quantity[selectedIndex];
-
-                                if (dquantity <= selectedQuantity)
-                                {
-                                    product.quantity[selectedIndex] -= dquantity;
-                                    string itemName = product.productNames[selectedIndex];
-                                    product.order.Add(itemName + " (Qty: " + quantity + ")");
-                                    product.values.Add(dquantity);
-                                }
-
-                                else
-                                {
-                                    Console.WriteLine("Insufficient quantity!");
-                                }
-                            
-                           
-                          
-                        }
-                        else if (keyInfo.Key == ConsoleKey.A)
-                        {
-                            goto start;
-                        }
+                        product.AddItem();
 
                     }
                     else if (currentLines == 1) //Edit Item
@@ -244,30 +213,7 @@ namespace POS___Test
                     }
                     else if (currentLines == 2) // Remove Item
                     {
-                        Console.WriteLine("Note: from 1 - i. depend on the product added");
-                        Console.Write("Enter item to be removed (by number): ");
-                        int itemNumber = int.Parse(Console.ReadLine());
-
-                        if (itemNumber >= 0 && itemNumber < product.order.Count)
-                        {
-                            int selectedIndex = itemNumber;
-                            //string removedItem = product.order[itemNumber];
-                            //product.order.RemoveAt(itemNumber);
-
-                            Console.Write("Enter quantity to be added back: ");
-                            int addedQuantity = int.Parse(Console.ReadLine());
-
-                            // Update the quantity in product.quantity
-                            product.quantity[selectedIndex] += addedQuantity;
-
-                            //Console.WriteLine("Removing item: " + removedItem);
-
-                        }
-
-                        else
-                        {
-                            Console.WriteLine("Invalid item number!");
-                        }
+                        product.RemoveItem();
                     }
                     else if (currentLines == 3) // Exit
                     {
