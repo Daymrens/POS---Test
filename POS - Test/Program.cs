@@ -37,13 +37,18 @@ namespace POS___Test
 
             
             ConsoleKeyInfo keyInfo;
-            
-            
+            int currentPage = 1;
+
             do
             {
                 int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
-                DisplayItems.DisplayProducts();
-                    for (int i = 0; i < product.lines.Length; i++)
+
+                // Calculate the range of products to display
+                int startIndex = (currentPage - 1) * product.pageSize;
+                int endIndex = Math.Min(currentPage * product.pageSize, product.productNames.Count);
+
+                DisplayItems.DisplayProducts(startIndex, endIndex);
+                for (int i = 0; i < product.lines.Length; i++)
                 {
                     if (i == product.currentLines)
                     {
@@ -57,7 +62,7 @@ namespace POS___Test
                 DisplayItems.DisplayCart();
                 keyInfo = Console.ReadKey();
 
-                int currentPage = 1;
+              
 
 
                 if (keyInfo.Key == ConsoleKey.LeftArrow && currentPage > 1)

@@ -50,109 +50,16 @@ namespace POS___Test
 
         }
 
-        public static void DisplayProducts()
+        public static void DisplayProducts(int startIndex, int endIndex)
         {
+            productsLinked product = new productsLinked();
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                Console.WriteLine(product.productNames[i]);
+            }
             int currentPage = 1;
-            productsLinked product = new productsLinked();            
-            product.productNames = new List<string>()
-            {
-            "Milk",
-            "Chocolate",
-            "Candy",
-            "Sour Candy",
-            "Bubble Gum",
-            "Snow Bear",
-            "Max",
-            "Presto",
-            "Sky Flakes",
-            "Bingo",
-            "Chocomucho",
-            "Cloud 9",
-            "Rebisco Crackers",
-            "Fresh Milk",
-            "Pineaple Juice",
-            "C2 Large",
-            "C2 Medium",
-            "C3 Small",
-            "Sprite Can",
-            "Coke Can",
-            "Royal Can",
-            "Trust",
-            "Robust",
-            "Lighter",
-            "Milo",
-            "Orange Juice",
-            "Tang",
-            "Eight Oclock",
-            "Bread",
-            "Mayonnaise",
-            };
-            product.quantity = new List<int>()
-            {
-            10,
-            5,
-            8,
-            3,
-            12,
-            6,
-            7,
-            9,
-            2,
-            4,
-            22,
-            99,
-            85,
-            34,
-            12,
-            61,
-            73,
-            93,
-            24,
-            45,
-            105,
-            55,
-            85,
-            35,
-            124,
-            64,
-            74,
-            93,
-            23,
-            43,
-            };
-            product.price = new List<int>()
-            {
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            };
+                      
+       
             int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
 
             Console.Clear();
