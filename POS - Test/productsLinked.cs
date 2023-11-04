@@ -18,6 +18,10 @@ namespace POS___Test
         public List<int> price = new List<int>();
         public List<(string productName, int quantityInCart)> cartItems { get; private set; } = new List<(string, int)>();
         public List<int> removedQuantities { get; private set; } // New list to track removed quantities
+        public string[] lines = { "Add", "Edit", "Remove", "Search" };
+        public int currentLines = 0;
+        public int currentPage = 1;
+        public int pageSize = 10;
 
 
         public void AddItem()

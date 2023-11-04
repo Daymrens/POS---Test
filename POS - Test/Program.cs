@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Windows.Forms.LinkLabel;
 
 
 namespace POS___Test
@@ -13,13 +14,13 @@ namespace POS___Test
     {
         DisplayItems items = new DisplayItems();
 
-
         static void Main(string[] args)
         {
             logo logo = new logo();
-            productsLinked linked = new productsLinked();
-            
-            
+        productsLinked product = new productsLinked();
+
+
+
             userDetails user = new userDetails();
      
            
@@ -32,8 +33,72 @@ namespace POS___Test
             string name = Console.ReadLine();
             Console.SetCursorPosition(11, currentLine - 0); // Move the cursor up 3 
             string pass = Console.ReadLine();
-           
-            DisplayItems.Menu1();
+
+
+            
+            ConsoleKeyInfo keyInfo;
+            
+            
+            do
+            {
+                int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
+                DisplayItems.DisplayProducts();
+                    for (int i = 0; i < product.lines.Length; i++)
+                {
+                    if (i == product.currentLines)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+                    Console.WriteLine(" -" + product.lines[i]);
+
+                    Console.ResetColor();
+                }
+                DisplayItems.DisplayCart();
+                keyInfo = Console.ReadKey();
+                
+                
+
+
+                if (keyInfo.Key == ConsoleKey.LeftArrow && product.currentPage > 1)
+                {
+                    product.currentPage--;
+                }
+                else if (keyInfo.Key == ConsoleKey.RightArrow && product.currentPage < totalPages)
+                {
+                    product.currentPage++;
+                }
+                if (keyInfo.Key == ConsoleKey.UpArrow)
+                {
+                    product.currentLines = Math.Max(0, product.currentLines - 1);
+                }
+                else if (keyInfo.Key == ConsoleKey.DownArrow)
+                {
+                    product.currentLines = Math.Min(product.lines.Length - 1, product.currentLines + 1);
+                }
+                else if (keyInfo.Key == ConsoleKey.Enter)
+                {
+
+                    if (product.currentLines == 0) // Add Items
+                    {
+                        product.AddItem();
+
+                    }
+                    else if (product.currentLines == 1) //Edit Item
+                    {
+                        // ...
+                    }
+                    else if (product.currentLines == 2) // Remove Item
+                    {
+                        product.RemoveItem();
+                    }
+                    else if (product.currentLines == 3) // Exit
+                    {
+                        break;
+                    }
+                }
+
+            } while (keyInfo.Key != ConsoleKey.Escape);
 
 
 

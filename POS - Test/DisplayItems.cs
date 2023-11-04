@@ -7,15 +7,52 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.ComponentModel.Design;
 using System.Windows.Forms;
+using System.Security.Cryptography.X509Certificates;
 
 namespace POS___Test
 {
-    internal class DisplayItems : productsLinked
+
+    internal class DisplayItems : Program
     {
 
-        public static void Menu1()
+        public static void DisplayCart()
         {
             productsLinked product = new productsLinked();
+
+            Console.SetCursorPosition(124, 1);
+                Console.WriteLine("ITEMS IN CART");
+                Console.SetCursorPosition(118, 2);
+                Console.WriteLine("══════════════════════════");
+             
+                for (int i = 0; i < product.cartItems.Count; i++)
+                {
+                    if (product.cartItems[i].quantityInCart > 0)
+                    {
+                        Console.SetCursorPosition(118, i + 3);
+                        Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
+                    }
+                    else
+                    {
+                        // Remove item from cart
+                        product.cartItems.RemoveAt(i);
+                        i--; // Decrement i to account for removed item
+                    }
+                }
+
+                Console.SetCursorPosition(118, product.cartItems.Count + 3);
+                Console.WriteLine("══════════════════════════");
+                Console.SetCursorPosition(1, 19);
+
+            
+
+
+
+
+        }
+
+        public static void DisplayProducts()
+        {
+            productsLinked product = new productsLinked();            
             product.productNames = new List<string>()
             {
             "Milk",
@@ -115,117 +152,26 @@ namespace POS___Test
             20,
             20,
             };
+            int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
 
-            string[] lines = { "Add", "Edit", "Remove", "Search" };
-            int currentLines = 0;           
-            int currentPage = 1;
-            int pageSize = 10;
-            int totalPages = (int)Math.Ceiling((double)product.productNames.Count / pageSize);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.SetCursorPosition(0, 0);
 
-            ConsoleKeyInfo keyInfo;
-            start:
-            do
+            Console.WriteLine($"Page {product.currentPage} of {totalPages}");
+            Console.WriteLine("  No.  Product Name \t Quantity \t Price");
+            Console.WriteLine("  ════════════════════════════════════════════════");
+            for (int i = (product.currentPage - 1) * product.pageSize; i < Math.Min(product.currentPage * product.pageSize, product.productNames.Count); i++)
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.SetCursorPosition(0, 0);
+                Console.Write($" [{i + 1}]".PadRight(5));
+                Console.Write($"║ {product.productNames[i].PadRight(20)}║");
+                Console.Write($" {product.quantity[i].ToString().PadRight(12)}║");
+                Console.Write($" $ {product.price[i].ToString().PadRight(5)}║\n");
+            }
+            Console.WriteLine("  ═════════════════════════════════════════════════");
+            Console.WriteLine(" < prev.                                 next >");
 
-                Console.WriteLine($"Page {currentPage} of {totalPages}");
-                Console.WriteLine("  No.  Product Name \t Quantity \t Price");
-                Console.WriteLine("  ════════════════════════════════════════════════");
-                for (int i = (currentPage - 1) * pageSize; i < Math.Min(currentPage * pageSize, product.productNames.Count); i++)
-                {
-                    Console.Write($" [{i + 1}]".PadRight(5));
-                    Console.Write($"║ {product.productNames[i].PadRight(20)}║");
-                    Console.Write($" {product.quantity[i].ToString().PadRight(12)}║");
-                    Console.Write($" $ {product.price[i].ToString().PadRight(5)}║\n");
-                }
-                Console.WriteLine("  ═════════════════════════════════════════════════");
-                Console.WriteLine(" < prev.                                 next >");
-
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (i == currentLines)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                    }
-                    Console.WriteLine(" -" + lines[i]);
-                    Console.ResetColor();
-                }
-
-                Console.SetCursorPosition(124, 1);
-                Console.WriteLine("ITEMS IN CART");
-                Console.SetCursorPosition(118, 2);
-                Console.WriteLine("══════════════════════════");
-                //for (int i = 0; i < product.order.Count; i++)
-                //{
-                //                      
-                //}
-                for (int i = 0; i < product.cartItems.Count; i++)
-                {
-                    if (product.cartItems[i].quantityInCart > 0)
-                    {
-                        Console.SetCursorPosition(118, i + 3);
-                        Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
-                    }
-                    else
-                    {
-                        // Remove item from cart
-                        product.cartItems.RemoveAt(i);
-                        i--; // Decrement i to account for removed item
-                    }
-                }
-
-                Console.SetCursorPosition(118, product.cartItems.Count + 3);
-                Console.WriteLine("══════════════════════════");
-                Console.SetCursorPosition(1, 19);
-                
-                keyInfo = Console.ReadKey();
-
-                if (keyInfo.Key == ConsoleKey.LeftArrow && currentPage > 1)
-                {
-                    currentPage--;
-                }
-                else if (keyInfo.Key == ConsoleKey.RightArrow && currentPage < totalPages)
-                {
-                    currentPage++;
-                }
-                if (keyInfo.Key == ConsoleKey.UpArrow)
-                {
-                    currentLines = Math.Max(0, currentLines - 1);
-                }
-                else if (keyInfo.Key == ConsoleKey.DownArrow)
-                {
-                    currentLines = Math.Min(lines.Length - 1, currentLines + 1);
-                }
-                else if (keyInfo.Key == ConsoleKey.Enter)
-                {
-
-                    if (currentLines == 0) // Add Items
-                    {
-                        product.AddItem();
-
-                    }
-                    else if (currentLines == 1) //Edit Item
-                    {
-                        // ...
-                    }
-                    else if (currentLines == 2) // Remove Item
-                    {
-                        product.RemoveItem();
-                    }
-                    else if (currentLines == 3) // Exit
-                    {
-                        break;
-                    }
-                }
-
-            } while (keyInfo.Key != ConsoleKey.Escape);
-
-
-
-
+            
         }
        
 
