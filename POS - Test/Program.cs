@@ -56,17 +56,17 @@ namespace POS___Test
                 }
                 DisplayItems.DisplayCart();
                 keyInfo = Console.ReadKey();
-                
-                
+
+                int currentPage = 1;
 
 
-                if (keyInfo.Key == ConsoleKey.LeftArrow && product.currentPage > 1)
+                if (keyInfo.Key == ConsoleKey.LeftArrow && currentPage > 1)
                 {
-                    product.currentPage--;
+                    currentPage--;
                 }
-                else if (keyInfo.Key == ConsoleKey.RightArrow && product.currentPage < totalPages)
+                else if (keyInfo.Key == ConsoleKey.RightArrow && currentPage < totalPages)
                 {
-                    product.currentPage++;
+                    currentPage++;
                 }
                 if (keyInfo.Key == ConsoleKey.UpArrow)
                 {

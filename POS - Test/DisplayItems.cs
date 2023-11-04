@@ -52,6 +52,7 @@ namespace POS___Test
 
         public static void DisplayProducts()
         {
+            int currentPage = 1;
             productsLinked product = new productsLinked();            
             product.productNames = new List<string>()
             {
@@ -158,10 +159,10 @@ namespace POS___Test
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(0, 0);
 
-            Console.WriteLine($"Page {product.currentPage} of {totalPages}");
+            Console.WriteLine($"Page {currentPage} of {totalPages}");
             Console.WriteLine("  No.  Product Name \t Quantity \t Price");
             Console.WriteLine("  ════════════════════════════════════════════════");
-            for (int i = (product.currentPage - 1) * product.pageSize; i < Math.Min(product.currentPage * product.pageSize, product.productNames.Count); i++)
+            for (int i = (currentPage - 1) * product.pageSize; i < Math.Min(currentPage * product.pageSize, product.productNames.Count); i++)
             {
                 Console.Write($" [{i + 1}]".PadRight(5));
                 Console.Write($"║ {product.productNames[i].PadRight(20)}║");
