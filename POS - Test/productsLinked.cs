@@ -21,7 +21,7 @@ namespace POS___Test
         public List<int> removedQuantities { get; private set; } // New list to track removed quantities
         public string[] lines = { "Add", "Edit", "Remove", "Search" };
         public int currentLines = 0;
-
+        public int currentPage = 1;
         public int pageSize = 10;
         // Constructor
         public productsLinked()
@@ -125,14 +125,12 @@ namespace POS___Test
             20,
             20,
             };
+            cartItems = new List<(string productName, int quantityInCart)>();
         }
 
-        public void AddItem()
+        public void AddItem(string itemNumber, string quantityy)
         {
-            Console.Write("Enter item to be added (Item Number): ");
-            string itemNumber = Console.ReadLine();
-            Console.Write("Quantity: ");
-            string quantityy = Console.ReadLine();
+            
             if (int.TryParse(itemNumber, out int number) && int.TryParse(quantityy, out int dquantity))
             {
                 int selectedIndex = number - 1; // Adjust for 0-based index
@@ -149,21 +147,28 @@ namespace POS___Test
                 }
             }
         }
-        public void RemoveItem()
+        public void RemoveItem(int itemNumber)
         {
-            Console.WriteLine("Note: always star from Zero[0]");
-            Console.Write("Enter item to be removed: ");
-            int itemNumber = int.Parse(Console.ReadLine());
+
+            if (cartItems == null)
+            {
+                Console.WriteLine("Cart is not initialized!");
+                return;
+            }
 
             if (itemNumber >= 0 && itemNumber < cartItems.Count)
             {
                 Console.Write("Enter quantity to be added back: ");
-                int addedQuantity = int.Parse(Console.ReadLine());
-
-                RemoveFromCart(productNames[itemNumber], addedQuantity);
-
+                int addedQuantity;
+                if (int.TryParse(Console.ReadLine(), out addedQuantity))
+                {
+                    RemoveFromCart(productNames[itemNumber], addedQuantity);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input for quantity!");
+                }
             }
-
             else
             {
                 Console.WriteLine("Invalid item number!");
@@ -200,17 +205,17 @@ namespace POS___Test
             }
         }
 
-        public void RemoveFromCart(string productName, int quantity)
+        public void RemoveFromCart(string productName, int quantityy)
         {
             var cartItem = cartItems.FirstOrDefault(item => item.productName == productName);
-            if (cartItem != default && quantity <= cartItem.quantityInCart)
+            if (cartItem != default && quantityy <= cartItem.quantityInCart)
             {
-                this.quantity[productNames.IndexOf(productName)] += quantity;
+                this.quantity[productNames.IndexOf(productName)] += quantityy;
                 cartItems.Remove(cartItem);
-                cartItems.Add((productName, cartItem.quantityInCart - quantity));
+                cartItems.Add((productName, cartItem.quantityInCart - quantityy));
 
                 // Add removed quantity to the list
-                //removedQuantities.Add(quantity);
+                removedQuantities.Add(quantityy);
 
             }
             else

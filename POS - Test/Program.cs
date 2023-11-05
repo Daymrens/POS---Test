@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,20 +13,12 @@ namespace POS___Test
 
     internal class Program
     {
-        DisplayItems items = new DisplayItems();
+        
 
         static void Main(string[] args)
         {
-            logo logo = new logo();
-        productsLinked product = new productsLinked();
-
-
-
-            userDetails user = new userDetails();
-     
-           
-
-                logo.Display();
+            productsLinked product = new productsLinked(); 
+            logo.Display();
                 Console.WriteLine(" LOGIN");
                 Console.Write(" Username: \n Password: ");
             int currentLine = Console.CursorTop;
@@ -37,17 +30,14 @@ namespace POS___Test
 
             
             ConsoleKeyInfo keyInfo;
-            int currentPage = 1;
+            
 
             do
             {
                 int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
 
-                // Calculate the range of products to display
-                int startIndex = (currentPage - 1) * product.pageSize;
-                int endIndex = Math.Min(currentPage * product.pageSize, product.productNames.Count);
 
-                DisplayItems.DisplayProducts(startIndex, endIndex);
+                DisplayItems.DisplayProducts(product);
                 for (int i = 0; i < product.lines.Length; i++)
                 {
                     if (i == product.currentLines)
@@ -59,19 +49,22 @@ namespace POS___Test
 
                     Console.ResetColor();
                 }
-                DisplayItems.DisplayCart();
+
+
+                DisplayItems.DisplayCart(product);
                 keyInfo = Console.ReadKey();
 
               
 
 
-                if (keyInfo.Key == ConsoleKey.LeftArrow && currentPage > 1)
+                if (keyInfo.Key == ConsoleKey.LeftArrow && product.currentPage > 1)
                 {
-                    currentPage--;
+                    
+                    product.currentPage--;
                 }
-                else if (keyInfo.Key == ConsoleKey.RightArrow && currentPage < totalPages)
+                else if (keyInfo.Key == ConsoleKey.RightArrow && product.currentPage < totalPages)
                 {
-                    currentPage++;
+                    product.currentPage++;
                 }
                 if (keyInfo.Key == ConsoleKey.UpArrow)
                 {
@@ -86,7 +79,11 @@ namespace POS___Test
 
                     if (product.currentLines == 0) // Add Items
                     {
-                        product.AddItem();
+                        Console.Write("Enter item to be added (Item Number): ");
+                        string itemNumber = Console.ReadLine();
+                        Console.Write("Quantity: ");
+                        string quantityy = Console.ReadLine();
+                        product.AddItem(itemNumber, quantityy);
 
                     }
                     else if (product.currentLines == 1) //Edit Item
@@ -95,7 +92,11 @@ namespace POS___Test
                     }
                     else if (product.currentLines == 2) // Remove Item
                     {
-                        product.RemoveItem();
+                        Console.WriteLine("Note: always star from Zero[0]");
+                        Console.Write("Enter item to be removed: ");
+                        int itemNumber = int.Parse(Console.ReadLine());
+
+                        product.RemoveItem(itemNumber);
                     }
                     else if (product.currentLines == 3) // Exit
                     {

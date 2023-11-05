@@ -12,64 +12,74 @@ using System.Security.Cryptography.X509Certificates;
 namespace POS___Test
 {
 
-    internal class DisplayItems : Program
+    internal class DisplayItems
     {
+       
 
-        public static void DisplayCart()
+        public productsLinked product;
+
+        public DisplayItems(productsLinked product)
         {
-            productsLinked product = new productsLinked();
+            this.product = product;
+        }
+        public static void DisplayCart(productsLinked product)
+        {
+           
 
             Console.SetCursorPosition(124, 1);
-                Console.WriteLine("ITEMS IN CART");
-                Console.SetCursorPosition(118, 2);
-                Console.WriteLine("══════════════════════════");
-             
-                for (int i = 0; i < product.cartItems.Count; i++)
+            Console.WriteLine("ITEMS IN CART");
+            Console.SetCursorPosition(118, 2);
+            Console.WriteLine("══════════════════════════");
+
+            for (int i = 0; i < product.cartItems.Count; i++)
+            {
+                if (product.cartItems[i].quantityInCart > 0)
                 {
-                    if (product.cartItems[i].quantityInCart > 0)
-                    {
-                        Console.SetCursorPosition(118, i + 3);
-                        Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
-                    }
-                    else
-                    {
-                        // Remove item from cart
-                        product.cartItems.RemoveAt(i);
-                        i--; // Decrement i to account for removed item
-                    }
+
+
+                    Console.SetCursorPosition(118, i + 3);
+
+                    Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
                 }
-
-                Console.SetCursorPosition(118, product.cartItems.Count + 3);
-                Console.WriteLine("══════════════════════════");
-                Console.SetCursorPosition(1, 19);
-
-            
-
-
-
-
+                else
+            {
+                // Remove item from cart
+                product.cartItems.RemoveAt(i);
+                i--; // Decrement i to account for removed item
+            }
         }
 
-        public static void DisplayProducts(int startIndex, int endIndex)
+            Console.SetCursorPosition(118, product.cartItems.Count + 3);
+            Console.WriteLine("══════════════════════════");
+            Console.SetCursorPosition(1, 19);
+        }
+
+
+
+
+
+
+
+
+     
+
+
+        public static void DisplayProducts(productsLinked product)
         {
-            productsLinked product = new productsLinked();
-            for (int i = startIndex; i < endIndex; i++)
-            {
-                Console.WriteLine(product.productNames[i]);
-            }
-            int currentPage = 1;
-                      
-       
+           
+        
+            
+
             int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(0, 0);
 
-            Console.WriteLine($"Page {currentPage} of {totalPages}");
+            Console.WriteLine($"Page {product.currentPage} of {totalPages}");
             Console.WriteLine("  No.  Product Name \t Quantity \t Price");
             Console.WriteLine("  ════════════════════════════════════════════════");
-            for (int i = (currentPage - 1) * product.pageSize; i < Math.Min(currentPage * product.pageSize, product.productNames.Count); i++)
+            for (int i = (product.currentPage - 1) * product.pageSize; i < Math.Min(product.currentPage * product.pageSize, product.productNames.Count); i++)
             {
                 Console.Write($" [{i + 1}]".PadRight(5));
                 Console.Write($"║ {product.productNames[i].PadRight(20)}║");
