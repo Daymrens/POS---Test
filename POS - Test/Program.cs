@@ -17,8 +17,8 @@ namespace POS___Test
 
         static void Main(string[] args)
         {
-            productsLinked product = new productsLinked(); 
-            logo.Display();
+            Inventory product = new Inventory(); 
+            DisplayLogo.Display();
                 Console.WriteLine(" LOGIN");
                 Console.Write(" Username: \n Password: ");
             int currentLine = Console.CursorTop;
@@ -35,9 +35,9 @@ namespace POS___Test
             do
             {
                 int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
+                Console.ForegroundColor = ConsoleColor.Yellow;
 
-
-                DisplayItems.DisplayProducts(product);
+                Display.DisplayProducts(product);
                 for (int i = 0; i < product.lines.Length; i++)
                 {
                     if (i == product.currentLines)
@@ -51,7 +51,7 @@ namespace POS___Test
                 }
 
 
-                DisplayItems.DisplayCart(product);
+                Display.DisplayCart(product);
                 keyInfo = Console.ReadKey();
 
               
@@ -92,11 +92,9 @@ namespace POS___Test
                     }
                     else if (product.currentLines == 2) // Remove Item
                     {
-                        Console.WriteLine("Note: always star from Zero[0]");
-                        Console.Write("Enter item to be removed: ");
-                        int itemNumber = int.Parse(Console.ReadLine());
+                       
 
-                        product.RemoveItem(itemNumber);
+                        product.RemoveItem();
                     }
                     else if (product.currentLines == 3) // Exit
                     {

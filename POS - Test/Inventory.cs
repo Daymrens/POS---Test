@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
 namespace POS___Test
 {
-    internal class productsLinked
+    internal class Inventory
     {
 
 
@@ -24,8 +25,9 @@ namespace POS___Test
         public int currentPage = 1;
         public int pageSize = 10;
         // Constructor
-        public productsLinked()
+        public Inventory()
         {
+            removedQuantities = new List<int>();
             productNames = new List<string>()
             {
             "Milk",
@@ -147,40 +149,33 @@ namespace POS___Test
                 }
             }
         }
-        public void RemoveItem(int itemNumber)
+        public void RemoveItem()
         {
-
-            if (cartItems == null)
-            {
-                Console.WriteLine("Cart is not initialized!");
-                return;
-            }
+            Console.WriteLine("Note: always star from Zero[0]");
+            Console.Write("Enter item to be removed: ");
+            int itemNumber = int.Parse(Console.ReadLine());
 
             if (itemNumber >= 0 && itemNumber < cartItems.Count)
             {
                 Console.Write("Enter quantity to be added back: ");
-                int addedQuantity;
-                if (int.TryParse(Console.ReadLine(), out addedQuantity))
-                {
-                    RemoveFromCart(productNames[itemNumber], addedQuantity);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input for quantity!");
-                }
+                int addedQuantity = int.Parse(Console.ReadLine());
+
+                //RemoveFromCart(productNames[itemNumber], addedQuantity);
+                RemoveFromCart(cartItems[itemNumber].productName, addedQuantity);
             }
+
             else
             {
                 Console.WriteLine("Invalid item number!");
             }
         }
 
-        public void AddToCart(string productName, int quantity)
+        public void AddToCart(string productName, int quantityy)
         {
             int index = productNames.IndexOf(productName);
-            if (index != -1 && quantity <= this.quantity[index])
+            if (index != -1 && quantityy <= this.quantity[index])
             {
-                this.quantity[index] -= quantity;
+                this.quantity[index] -= quantityy;
 
                 if (cartItems == null)
                 {
@@ -191,12 +186,12 @@ namespace POS___Test
                 if (cartItem != default)
                 {
                     cartItems.Remove(cartItem);
-                    cartItem.quantityInCart += quantity;
+                    cartItem.quantityInCart += quantityy;
                     cartItems.Add(cartItem);
                 }
                 else
                 {
-                    cartItems.Add((productName, quantity));
+                    cartItems.Add((productName, quantityy));
                 }
             }
             else
@@ -210,8 +205,13 @@ namespace POS___Test
             var cartItem = cartItems.FirstOrDefault(item => item.productName == productName);
             if (cartItem != default && quantityy <= cartItem.quantityInCart)
             {
-                this.quantity[productNames.IndexOf(productName)] += quantityy;
+                int index = productNames.IndexOf(productName);
+                quantity[index] += quantityy;
+
+                //quantity[productNames.IndexOf(productName)] += quantityy;
+
                 cartItems.Remove(cartItem);
+
                 cartItems.Add((productName, cartItem.quantityInCart - quantityy));
 
                 // Add removed quantity to the list
@@ -221,7 +221,10 @@ namespace POS___Test
             else
             {
                 Console.WriteLine("Invalid input! Please try again.");
+                Thread.Sleep(500);
             }
+            
+            
         }
 
 

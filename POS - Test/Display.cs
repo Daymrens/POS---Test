@@ -12,45 +12,40 @@ using System.Security.Cryptography.X509Certificates;
 namespace POS___Test
 {
 
-    internal class DisplayItems
+    internal class Display
     {
        
 
-        public productsLinked product;
+        public Inventory product;
 
-        public DisplayItems(productsLinked product)
+        public Display(Inventory product)
         {
             this.product = product;
         }
-        public static void DisplayCart(productsLinked product)
+        public static void DisplayCart(Inventory product)
         {
-           
-
-            Console.SetCursorPosition(124, 1);
+            Console.SetCursorPosition(126, 1);
             Console.WriteLine("ITEMS IN CART");
             Console.SetCursorPosition(118, 2);
-            Console.WriteLine("══════════════════════════");
+            Console.WriteLine("══════════════════════════════");
 
-            for (int i = 0; i < product.cartItems.Count; i++)
+            for (int i = product.cartItems.Count - 1; i >= 0; i--)
             {
                 if (product.cartItems[i].quantityInCart > 0)
                 {
-
-
-                    Console.SetCursorPosition(118, i + 3);
-
+                    Console.SetCursorPosition(117, i + 3);
+                    Console.Write($" [{i}]".PadRight(5));
                     Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
                 }
                 else
-            {
-                // Remove item from cart
-                product.cartItems.RemoveAt(i);
-                i--; // Decrement i to account for removed item
+                {
+                    // Remove item from cart
+                    product.cartItems.RemoveAt(i);
+                }
             }
-        }
 
             Console.SetCursorPosition(118, product.cartItems.Count + 3);
-            Console.WriteLine("══════════════════════════");
+            Console.WriteLine("══════════════════════════════");
             Console.SetCursorPosition(1, 19);
         }
 
@@ -64,11 +59,8 @@ namespace POS___Test
      
 
 
-        public static void DisplayProducts(productsLinked product)
+        public static void DisplayProducts(Inventory product)
         {
-           
-        
-            
 
             int totalPages = (int)Math.Ceiling((double)product.productNames.Count / product.pageSize);
 
@@ -77,7 +69,7 @@ namespace POS___Test
             Console.SetCursorPosition(0, 0);
 
             Console.WriteLine($"Page {product.currentPage} of {totalPages}");
-            Console.WriteLine("  No.  Product Name \t Quantity \t Price");
+            Console.WriteLine(" No.  Product Name \t Quantity \t Price");
             Console.WriteLine("  ════════════════════════════════════════════════");
             for (int i = (product.currentPage - 1) * product.pageSize; i < Math.Min(product.currentPage * product.pageSize, product.productNames.Count); i++)
             {

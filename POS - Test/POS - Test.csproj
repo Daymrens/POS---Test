@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisplayItems.cs" />
-    <Compile Include="logo.cs" />
-    <Compile Include="productsLinked.cs" />
+    <Compile Include="Display.cs" />
+    <Compile Include="DisplayLogo.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="userDetails.cs" />

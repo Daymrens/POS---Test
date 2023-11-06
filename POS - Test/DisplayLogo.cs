@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace POS___Test
 {
-    internal class logo
+    internal class DisplayLogo
     {
 
         public static void Display()
