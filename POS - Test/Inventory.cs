@@ -128,11 +128,35 @@ namespace POS___Test
             20,
             };
             cartItems = new List<(string productName, int quantityInCart)>();
+           
+
+ 
+            
         }
 
+        static void Wait()
+        {
+            Console.WriteLine("Press any key to continue.... or wait 5 sec.");
+            for (int i = 0; i < 5; i++)
+            {
+                if (Console.KeyAvailable)
+                {
+                    Console.ReadKey(intercept: true);
+                    return;
+                }
+
+                if (i == 4)
+                {
+                    return;
+                }
+                Thread.Sleep(1000);
+            }
+        }
+      
         public void AddItem(string itemNumber, string quantityy)
         {
-            
+           
+
             if (int.TryParse(itemNumber, out int number) && int.TryParse(quantityy, out int dquantity))
             {
                 int selectedIndex = number - 1; // Adjust for 0-based index
@@ -145,29 +169,63 @@ namespace POS___Test
                 }
                 else
                 {
+                  
                     Console.WriteLine("Insufficient quantity!");
+                    
+                   Wait();
+                        
+
                 }
             }
         }
         public void RemoveItem()
         {
-            Console.WriteLine("Note: always star from Zero[0]");
-            Console.Write("Enter item to be removed: ");
-            int itemNumber = int.Parse(Console.ReadLine());
-
-            if (itemNumber >= 0 && itemNumber < cartItems.Count)
+            if (cartItems == null || cartItems.Count == 0)
             {
-                Console.Write("Enter quantity to be added back: ");
-                int addedQuantity = int.Parse(Console.ReadLine());
+                Console.WriteLine("Cart is empty. Cannot remove items.");
+                Wait();
+                return; // Exit the method
+            }
+            while (true) // Infinite loop
+            {
+                Console.Write("Enter item to be removed: ");
+                string userInput = Console.ReadLine();
 
-                //RemoveFromCart(productNames[itemNumber], addedQuantity);
-                RemoveFromCart(cartItems[itemNumber].productName, addedQuantity);
+                if (int.TryParse(userInput, out int itemNumber) && itemNumber >= 0 && itemNumber < cartItems.Count)
+                {
+                    Console.Write("Enter quantity to be added back: ");
+                    string quantityInput = Console.ReadLine();
+
+                    if (int.TryParse(quantityInput, out int addedQuantity))
+                    {
+                        RemoveFromCart(cartItems[itemNumber].productName, addedQuantity);
+                        break; // Exit the loop if successful
+                    }
+                   
+                    else
+                    {
+                        Console.WriteLine("Invalid quantity input!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid item number!");
+                    ClearLine();
+                }
+            }
+        }
+
+        static void ClearLine()
+        {
+            int currentLine = Console.CursorTop; // Get the current line
+            Console.SetCursorPosition(0, currentLine - 2); // Move the cursor
+            for (int j = 0; j < 2; j++)
+            {
+                Console.Write(new string(' ', Console.WindowWidth));
             }
 
-            else
-            {
-                Console.WriteLine("Invalid item number!");
-            }
+            // Move the cursor back to the original position
+            Console.SetCursorPosition(0, currentLine - 2);
         }
 
         public void AddToCart(string productName, int quantityy)

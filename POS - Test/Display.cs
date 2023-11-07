@@ -34,7 +34,7 @@ namespace POS___Test
                 if (product.cartItems[i].quantityInCart > 0)
                 {
                     Console.SetCursorPosition(117, i + 3);
-                    Console.Write($" [{i}]".PadRight(5));
+                    Console.Write($" [{i + 1}]".PadRight(5));
                     Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
                 }
                 else
