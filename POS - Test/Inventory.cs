@@ -20,7 +20,8 @@ namespace POS___Test
 
         public List<(string productName, int quantityInCart)> cartItems { get; private set; } = new List<(string, int)>();
         public List<int> removedQuantities { get; private set; } // New list to track removed quantities
-        public string[] lines = { "Add", "Edit", "Remove", "Search" };
+        public string[] linesEmployee = { "Add", "Search", "Admin" };
+        public string[] linesAdmin = { "Add", "Edit", "Remove", "Search", "Exit" };
         public int currentLines = 0;
         public int currentPage = 1;
         public int pageSize = 10;
@@ -47,7 +48,7 @@ namespace POS___Test
             "Pineaple Juice",
             "C2 Large",
             "C2 Medium",
-            "C3 Small",
+            "C2 Small",
             "Sprite Can",
             "Coke Can",
             "Royal Can",
@@ -63,75 +64,71 @@ namespace POS___Test
             };
             quantity = new List<int>()
             {
-            10,
-            5,
-            8,
-            3,
-            12,
-            6,
-            7,
-            9,
-            2,
-            4,
-            22,
+            102,
+            53,
+            814,
+            35,
+            132,
+            623,
+            37,
+            329,
+            254,
+            45,
+            232,
             99,
             85,
-            34,
-            12,
-            61,
+            334,
+            142,
+            621,
             73,
             93,
-            24,
-            45,
+            234,
+            425,
             105,
-            55,
+            535,
             85,
-            35,
+            325,
             124,
             64,
             74,
             93,
-            23,
+            233,
             43,
             };
             price = new List<int>()
             {
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            10,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
-            20,
+            200,
+            100,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            100,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            100,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
+            200,
             };
             cartItems = new List<(string productName, int quantityInCart)>();
-           
-
- 
-            
         }
 
         static void Wait()
@@ -152,14 +149,14 @@ namespace POS___Test
                 Thread.Sleep(1000);
             }
         }
-      
+
         public void AddItem(string itemNumber, string quantityy)
         {
-           
+
 
             if (int.TryParse(itemNumber, out int number) && int.TryParse(quantityy, out int dquantity))
             {
-                int selectedIndex = number ; // Adjust for 0-based index
+                int selectedIndex = number - 1; // Adjust for 0-based index
 
                 int selectedQuantity = quantity[selectedIndex];
 
@@ -169,11 +166,11 @@ namespace POS___Test
                 }
                 else
                 {
-                  
+
                     Console.WriteLine("Insufficient quantity!");
-                    
-                   Wait();
-                        
+
+                    Wait();
+
 
                 }
             }
@@ -201,7 +198,7 @@ namespace POS___Test
                         RemoveFromCart(cartItems[itemNumber].productName, addedQuantity);
                         break; // Exit the loop if successful
                     }
-                   
+
                     else
                     {
                         Console.WriteLine("Invalid quantity input!");
@@ -281,13 +278,13 @@ namespace POS___Test
                 Console.WriteLine("Invalid input! Please try again.");
                 Thread.Sleep(500);
             }
-            
-            
+
+
         }
 
 
-    
-    
+
+
 
 
 
@@ -313,5 +310,5 @@ namespace POS___Test
 
     }
 
-    }
+}
 

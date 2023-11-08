@@ -14,7 +14,7 @@ namespace POS___Test
 
     internal class Display
     {
-       
+
 
         public Inventory product;
 
@@ -46,7 +46,7 @@ namespace POS___Test
 
             Console.SetCursorPosition(118, product.cartItems.Count + 3);
             Console.WriteLine("══════════════════════════════");
-            Console.SetCursorPosition(1, 19);
+            Console.SetCursorPosition(1, 18);
         }
 
 
@@ -56,7 +56,7 @@ namespace POS___Test
 
 
 
-     
+
 
 
         public static void DisplayProducts(Inventory product)
@@ -81,9 +81,9 @@ namespace POS___Test
             Console.WriteLine("  ═════════════════════════════════════════════════");
             Console.WriteLine(" < prev.                                 next >");
 
-            
+
         }
-       
+
 
 
 
@@ -91,7 +91,7 @@ namespace POS___Test
 
     }
 }
-    
+
 
 
 

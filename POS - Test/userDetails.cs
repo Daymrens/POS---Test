@@ -19,25 +19,25 @@ namespace POS___Test
         public string choice;
         public int userInput;
 
-       //example adding or removing code
+        //example adding or removing code
 
         public bool CheckChoice()
         {
             if (int.TryParse(choice, out userInput))
             {
-                if(userInput == 0)
+                if (userInput == 0)
                 {
                     Thread.Sleep(500);
                     Console.Clear();
                     return true;
                 }
-                else if(userInput == 1)
+                else if (userInput == 1)
                 {
                     Thread.Sleep(500);
                     Console.Clear();
                     return true;
                 }
-                if(userInput >= 2)
+                if (userInput >= 2)
                 {
                     Thread.Sleep(500);
                     Console.Clear();
@@ -56,11 +56,11 @@ namespace POS___Test
         }
 
 
-            
+
 
         public bool CheckAdmin()
         {
-            if(userName == admin && password == adminPass)
+            if (userName == admin && password == adminPass)
             {
                 Console.WriteLine("Log in Successfull");
                 return true;
@@ -71,13 +71,13 @@ namespace POS___Test
                 Console.Clear();
                 Console.WriteLine("Invalid admin(basta di mao imong admin details!");
                 return false;
-                
+
             }
         }
 
         public bool CheckUser()
         {
-            if(string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(password))
             {
                 Thread.Sleep(500);
                 Console.Clear();
@@ -92,9 +92,9 @@ namespace POS___Test
 
         }
 
-       
 
-        
-       
+
+
+
     }
 }
