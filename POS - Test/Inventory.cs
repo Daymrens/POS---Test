@@ -159,7 +159,7 @@ namespace POS___Test
 
             if (int.TryParse(itemNumber, out int number) && int.TryParse(quantityy, out int dquantity))
             {
-                int selectedIndex = number - 1; // Adjust for 0-based index
+                int selectedIndex = number ; // Adjust for 0-based index
 
                 int selectedQuantity = quantity[selectedIndex];
 
