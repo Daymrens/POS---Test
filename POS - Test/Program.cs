@@ -19,14 +19,13 @@ namespace POS___Test
         {
             Inventory product = new Inventory();
             DisplayLogo.Display();
-            Console.WriteLine(" LOGIN");
-            Console.Write(" Username: \n Password: ");
-            int currentLine = Console.CursorTop;
-            Console.SetCursorPosition(11, currentLine - 1); // Move the cursor up 3 
-            string name = Console.ReadLine();
-            Console.SetCursorPosition(11, currentLine - 0); // Move the cursor up 3 
-            string pass = Console.ReadLine();
-
+            
+            Console.WriteLine("Opening System");
+            for(int i = 0; i < 10; i++)
+            {
+                Console.Write(". ");
+                Thread.Sleep(100);
+            }
             bool admin = false;
 
             ConsoleKeyInfo keyInfo;
@@ -40,6 +39,8 @@ namespace POS___Test
                 Display.DisplayProducts(product);
                 Display.DisplayCart(product);
                 Console.SetCursorPosition(1, 15);
+                Console.WriteLine("Menu");
+                Console.SetCursorPosition(1, 16);
                 if (admin == false)
                 {
                     for (int i = 0; i < product.linesEmployee.Length; i++)
@@ -53,10 +54,26 @@ namespace POS___Test
 
                         Console.ResetColor();
                     }
-                    Console.SetCursorPosition(1, 20);
+                    Console.SetCursorPosition(1, 19);
                 }
                 else if (admin == true)
                 {
+                    
+                    Console.WriteLine("══════════");
+
+                    Console.WriteLine(" ADMIN");
+
+                    Console.Write(" Username:");
+
+                    Console.Write(" Password:");
+
+                    int currentLine = Console.CursorTop;
+
+                    string name = Console.ReadLine();
+
+                    string pass = Console.ReadLine();
+
+                 
                     for (int i = 0; i < product.linesAdmin.Length; i++)
                     {
                         if (i == product.currentLines)
@@ -69,7 +86,7 @@ namespace POS___Test
                         Console.ResetColor();
                     }
 
-                    Console.SetCursorPosition(1, 20);
+                    Console.SetCursorPosition(1, 21);
                 }
                 keyInfo = Console.ReadKey();
 

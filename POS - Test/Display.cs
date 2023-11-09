@@ -54,7 +54,7 @@ namespace POS___Test
 
 
 
-
+        
 
 
 
@@ -68,7 +68,7 @@ namespace POS___Test
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(0, 0);
 
-            Console.WriteLine($"Page {product.currentPage} of {totalPages}");
+            
             Console.WriteLine(" No.  Product Name \t Quantity \t Price");
             Console.WriteLine("  ════════════════════════════════════════════════");
             for (int i = (product.currentPage - 1) * product.pageSize; i < Math.Min(product.currentPage * product.pageSize, product.productNames.Count); i++)
@@ -79,8 +79,8 @@ namespace POS___Test
                 Console.Write($" $ {product.price[i].ToString().PadRight(5)}║\n");
             }
             Console.WriteLine("  ═════════════════════════════════════════════════");
-            Console.WriteLine(" < prev.                                 next >");
-
+            Console.WriteLine($" < prev.           Page {product.currentPage} of {totalPages}             next >");
+            Console.WriteLine($"");
 
         }
 
