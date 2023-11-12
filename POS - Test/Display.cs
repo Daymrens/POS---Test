@@ -24,16 +24,16 @@ namespace POS___Test
         }
         public static void DisplayCart(Inventory product)
         {
-            Console.SetCursorPosition(126, 1);
+            Console.SetCursorPosition(100, 1);
             Console.WriteLine("ITEMS IN CART");
-            Console.SetCursorPosition(118, 2);
+            Console.SetCursorPosition(92, 2);
             Console.WriteLine("══════════════════════════════");
 
             for (int i = product.cartItems.Count - 1; i >= 0; i--)
             {
                 if (product.cartItems[i].quantityInCart > 0)
                 {
-                    Console.SetCursorPosition(117, i + 3);
+                    Console.SetCursorPosition(91, i + 3);
                     Console.Write($" [{i + 1}]".PadRight(5));
                     Console.WriteLine($"║ {product.cartItems[i].ToString().PadRight(23)}║");
                 }
@@ -44,7 +44,7 @@ namespace POS___Test
                 }
             }
 
-            Console.SetCursorPosition(118, product.cartItems.Count + 3);
+            Console.SetCursorPosition(92, product.cartItems.Count + 3);
             Console.WriteLine("══════════════════════════════");
             Console.SetCursorPosition(1, 18);
         }
@@ -66,7 +66,7 @@ namespace POS___Test
 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(1, 1);
 
             
             Console.WriteLine(" No.  Product Name \t Quantity \t Price");

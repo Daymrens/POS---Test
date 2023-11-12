@@ -57,22 +57,7 @@ namespace POS___Test
                     Console.SetCursorPosition(1, 19);
                 }
                 else if (admin == true)
-                {
-                    
-                    Console.WriteLine("══════════");
-
-                    Console.WriteLine(" ADMIN");
-
-                    Console.Write(" Username:");
-
-                    Console.Write(" Password:");
-
-                    int currentLine = Console.CursorTop;
-
-                    string name = Console.ReadLine();
-
-                    string pass = Console.ReadLine();
-
+                {                
                  
                     for (int i = 0; i < product.linesAdmin.Length; i++)
                     {
