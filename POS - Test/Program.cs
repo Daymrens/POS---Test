@@ -111,6 +111,7 @@ namespace POS___Test
                             string itemNumber = Console.ReadLine();
                             Console.Write("Quantity: ");
                             string quantityy = Console.ReadLine();
+                           
                             product.AddItem(itemNumber, quantityy);
 
                         }

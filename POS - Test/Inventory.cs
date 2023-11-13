@@ -153,26 +153,34 @@ namespace POS___Test
         public void AddItem(string itemNumber, string quantityy)
         {
 
-
             if (int.TryParse(itemNumber, out int number) && int.TryParse(quantityy, out int dquantity))
             {
                 int selectedIndex = number - 1; // Adjust for 0-based index
 
-                int selectedQuantity = quantity[selectedIndex];
-
-                if (dquantity <= selectedQuantity)
+                if (selectedIndex >= 0 && selectedIndex < productNames.Count)
                 {
-                    AddToCart(productNames[selectedIndex], dquantity);
+                    int selectedQuantity = quantity[selectedIndex];
+
+                    if (dquantity <= selectedQuantity)
+                    {
+                        AddToCart(productNames[selectedIndex], dquantity);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Insufficient quantity!");
+                        Wait();
+                    }
                 }
                 else
                 {
-
-                    Console.WriteLine("Insufficient quantity!");
-
+                    Console.WriteLine("Invalid item number! Please enter a valid item number.");
                     Wait();
-
-
                 }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input! Please enter valid numbers for item number and quantity.");
+                Wait();
             }
         }
         public void RemoveItem()
