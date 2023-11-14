@@ -13,21 +13,33 @@ namespace POS___Test
         public static void Display()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("══════════════════════════════");
+            Console.SetCursorPosition(60, 5);
+                Console.WriteLine("══════════════════════════════");
+            Console.SetCursorPosition(60, 6);
             Console.WriteLine(@"  ██████╗  ██████╗ ███████╗");
+            Console.SetCursorPosition(60, 7);
             Thread.Sleep(50);
-            Console.WriteLine(@"  ██╔══██╗██╔═══██╗██╔════╝");
+                Console.WriteLine(@"  ██╔══██╗██╔═══██╗██╔════╝");
+            Console.SetCursorPosition(60, 8);
             Thread.Sleep(50);
-            Console.WriteLine(@"  ██████╔╝██║   ██║███████╗");
-            Thread.Sleep(50);            
-            Console.WriteLine(@"  ██╔═══╝ ██║   ██║╚════██║");
+                Console.WriteLine(@"  ██████╔╝██║   ██║███████╗");
+            Console.SetCursorPosition(60, 9);
             Thread.Sleep(50);
-            Console.WriteLine(@"  ██║     ╚██████╔╝███████║");
+                Console.WriteLine(@"  ██╔═══╝ ██║   ██║╚════██║");
+            Console.SetCursorPosition(60, 10);
             Thread.Sleep(50);
-            Console.WriteLine(@"  ╚═╝      ╚═════╝ ╚══════╝");
+                Console.WriteLine(@"  ██║     ╚██████╔╝███████║");
+            Console.SetCursorPosition(60, 11);
             Thread.Sleep(50);
-            Console.WriteLine("══════════════════════════════");
+                Console.WriteLine(@"  ╚═╝      ╚═════╝ ╚══════╝");
+            Console.SetCursorPosition(60, 12);
             Thread.Sleep(50);
+                Console.WriteLine("══════════════════════════════");
+            Console.SetCursorPosition(60, 13);
+            Thread.Sleep(50);
+                
+           
+            
             //hotdog
 
         }

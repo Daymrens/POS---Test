@@ -23,8 +23,9 @@ namespace POS___Test
             DisplayLogo.Display();
 
             Console.WriteLine("Opening System");
-            for (int i = 0; i < 10; i++)
-            {
+            for (int i = 0; i < 15; i++)
+            {                                
+                Console.SetCursorPosition(60 + i, 13);
                 Console.Write(". ");
                 Thread.Sleep(100);
             }

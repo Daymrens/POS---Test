@@ -141,9 +141,14 @@ namespace POS___Test
             {
                 Console.SetCursorPosition(23, startingY + displayIndex);
                 Console.Write($" [{i + 1}]".PadRight(5));
+                Console.ForegroundColor = ConsoleColor.Yellow ;
                 Console.Write($"║ {product.productNames[i].PadRight(20)}║");
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($" {product.quantity[i].ToString().PadRight(12)}║");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write($" $ {product.price[i].ToString().PadRight(5)}║\n");
+                
+                Console.ResetColor();
             }
 
             Console.SetCursorPosition(23, startingY + product.pageSize); // Set the Y-coordinate after the loop
