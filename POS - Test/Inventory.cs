@@ -22,9 +22,12 @@ namespace POS___Test
         public List<int> removedQuantities { get; private set; } // New list to track removed quantities
         public string[] linesEmployee = { "Add", "Search", "Admin" };
         public string[] linesAdmin = { "Add", "Edit", "Remove", "Search", "Exit" };
+        public string[] edit = { "[-] Edit", "[-] Remove" };
         public int currentLines = 0;
         public int currentPage = 1;
         public int pageSize = 10;
+        public bool editable = false;
+        public bool admin = false;
         // Constructor
         public Inventory()
         {
@@ -133,7 +136,7 @@ namespace POS___Test
 
         static void Wait()
         {
-            Console.WriteLine("Press any key to continue.... or wait 5 sec.");
+            
             for (int i = 0; i < 5; i++)
             {
                 if (Console.KeyAvailable)
@@ -152,7 +155,7 @@ namespace POS___Test
 
         public void AddItem(string itemNumber, string quantityy)
         {
-
+            
             if (int.TryParse(itemNumber, out int number) && int.TryParse(quantityy, out int dquantity))
             {
                 int selectedIndex = number - 1; // Adjust for 0-based index
@@ -167,19 +170,29 @@ namespace POS___Test
                     }
                     else
                     {
+                        Console.SetCursorPosition(24, 18);
                         Console.WriteLine("Insufficient quantity!");
+                        Console.SetCursorPosition(24, 19);
+                        Console.WriteLine("Press any key to continue.... or wait 5 sec.");
                         Wait();
+                        
                     }
                 }
                 else
                 {
+                    Console.SetCursorPosition(24, 18);
                     Console.WriteLine("Invalid item number! Please enter a valid item number.");
+                    Console.SetCursorPosition(24, 19);
+                    Console.WriteLine("Press any key to continue.... or wait 5 sec.");
                     Wait();
                 }
             }
             else
             {
+                Console.SetCursorPosition(24, 18);
                 Console.WriteLine("Invalid input! Please enter valid numbers for item number and quantity.");
+                Console.SetCursorPosition(24, 19);
+                Console.WriteLine("Press any key to continue.... or wait 5 sec.");
                 Wait();
             }
         }
@@ -193,11 +206,13 @@ namespace POS___Test
             }
             while (true) // Infinite loop
             {
+                Console.SetCursorPosition(25, 16);
                 Console.Write("Enter item to be removed: ");
                 string userInput = Console.ReadLine();
 
                 if (int.TryParse(userInput, out int itemNumber) && itemNumber >= 0 && itemNumber < cartItems.Count)
                 {
+                    Console.SetCursorPosition(25, 17);
                     Console.Write("Enter quantity to be added back: ");
                     string quantityInput = Console.ReadLine();
 
@@ -209,11 +224,13 @@ namespace POS___Test
 
                     else
                     {
+                        Console.SetCursorPosition(25, 18);
                         Console.WriteLine("Invalid quantity input!");
                     }
                 }
                 else
                 {
+                    Console.SetCursorPosition(25, 18);
                     Console.WriteLine("Invalid item number!");
                     ClearLine();
                 }
@@ -296,15 +313,19 @@ namespace POS___Test
 
 
 
-        public void FindRelevance(List<string> list, string prodName)
+        public void FindRelevance(List<string> productName, string prodName)
         {
-            foreach (var item in list)
+            foreach (var item in productNames)
             {
                 if (HasRelevance(item, prodName))
                 {
+                    
                     Console.WriteLine(item);
 
                 }
+               
+                    Thread.Sleep(10);
+                
             }
         }
         static bool HasRelevance(string list, string prodName)
